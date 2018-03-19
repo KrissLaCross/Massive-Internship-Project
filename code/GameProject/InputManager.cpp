@@ -51,7 +51,7 @@ void InputManager::UpdateButtonStates()
 {
 	if (!Game::GetGameWindow()->GetRenderWindow()->hasFocus())
 		return;
-
+	
 	myButtons[eMoveUp].isDown		= sf::Keyboard::isKeyPressed(sf::Keyboard::W);
 	myButtons[eMoveDown].isDown		= sf::Keyboard::isKeyPressed(sf::Keyboard::S);
 	myButtons[eMoveLeft].isDown		= sf::Keyboard::isKeyPressed(sf::Keyboard::A);

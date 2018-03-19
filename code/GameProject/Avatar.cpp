@@ -22,6 +22,8 @@ void Avatar::Update()
 {
     Move();
 
+
+
     if (m_input->WasButtonPressed(InputManager::eFire))
     {
         Shoot();

@@ -30,8 +30,9 @@ void World::Update()
 void World::Draw()
 {
     Game::GetRenderer()->Draw(myBackGround);
-
+	
     myAvatar->Draw();
     myEnemy->Draw();
+	
 }
 
