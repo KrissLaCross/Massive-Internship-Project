@@ -12,8 +12,7 @@ public:
         bool wasDown;
     };
 
-
-    enum Button
+	enum Button
     {
         eMoveUp,
         eMoveDown,

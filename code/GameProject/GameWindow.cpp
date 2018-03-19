@@ -1,7 +1,7 @@
 #include "GameWindow.h"
 
 GameWindow::GameWindow()
-	:mySFMLWindow(sf::VideoMode(512, 512), "SFML works!")
+	:mySFMLWindow(sf::VideoMode(512, 512), "SFML works!", sf::Style::Default, sf::ContextSettings(0U, 0U, 16U))
 {
 
 }

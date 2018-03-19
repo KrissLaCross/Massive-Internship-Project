@@ -29,9 +29,13 @@ void World::Update()
 
 void World::Draw()
 {
-    Game::GetRenderer()->Draw(myBackGround);
+    //Game::GetRenderer()->Draw(myBackGround);
 
-    myAvatar->Draw();
-    myEnemy->Draw();
+    //myAvatar->Draw();
+    //myEnemy->Draw();
+	Game::GetRenderer()->DrawLine(100, 100, 300, 200);
+	Game::GetRenderer()->DrawCircle(400, 400, 32, true);
+	Game::GetRenderer()->DrawRect(100, 300, 32, 32, false);
+
 }
 
