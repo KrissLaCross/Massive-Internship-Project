@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "Image.h"
 #include "Game.h"
 
 #include "SFML\Graphics\RenderWindow.hpp"
@@ -17,17 +16,12 @@ void Renderer::Shutdown()
 	mySFMLWindow = nullptr;
 }
 
-void Renderer::Draw(Image* image)
-{
-	mySFMLWindow->draw(image->GetSprite());
-}
-
 void Renderer::DrawLine(float x1, float y1, float x2, float y2)
 {
-	DrawLine(sf::Vector2f(x1, y1), sf::Vector2f(x2, y2));
+	DrawLine({ x1, y1 }, { x2, y2 });
 }
 
-void Renderer::DrawLine(sf::Vector2f aStart, sf::Vector2f aEnd)
+void Renderer::DrawLine(stoffe::Vector2F aStart, stoffe::Vector2F aEnd)
 {
 	sf::Vertex line[] =
 	{
@@ -46,7 +40,7 @@ void Renderer::DrawRect(float x, float y, float aWidth, float aHeight, bool isCe
 	mySFMLWindow->draw(myRectangle);
 }
 
-void Renderer::DrawRect(sf::Vector2f aPosition, sf::Vector2f aSize, bool isCentered)
+void Renderer::DrawRect(stoffe::Vector2F aPosition, stoffe::Vector2F aSize, bool isCentered)
 {
 	DrawRect(aPosition.x, aPosition.y, aSize.x, aSize.y, isCentered);
 }
@@ -59,7 +53,7 @@ void Renderer::DrawCircle(float x, float y, float aRadius, bool isCentered)
 	mySFMLWindow->draw(myCircle);
 }
 
-void Renderer::DrawCircle(sf::Vector2f aPosition, float aRadius, bool isCentered)
+void Renderer::DrawCircle(stoffe::Vector2F aPosition, float aRadius, bool isCentered)
 {
 	DrawCircle(aPosition.x, aPosition.y, aRadius, isCentered);
 }

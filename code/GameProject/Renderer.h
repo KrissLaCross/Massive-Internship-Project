@@ -4,6 +4,7 @@
 #include "SFML\Graphics\RenderWindow.hpp"
 #include "SFML\Graphics\RectangleShape.hpp"
 #include "SFML\Graphics\CircleShape.hpp"
+#include "Vector2.h"
 
 class Image;
 
@@ -12,19 +13,18 @@ class Renderer
 public:
     bool Init();
     void Shutdown();
-
+	
 	void Prepare();
     void Render();
-    void Draw(Image* image);
 	
 	void DrawLine(float x1, float y1, float x2, float y2);
-	void DrawLine(sf::Vector2f aStart, sf::Vector2f aEnd);
+	void DrawLine(stoffe::Vector2F aStart, stoffe::Vector2F aEnd);
 
 	void DrawRect(float x, float y, float aWidth, float aHeight, bool isCentered = false);
-	void DrawRect(sf::Vector2f aPosition, sf::Vector2f aSize, bool isCentered = false);
+	void DrawRect(stoffe::Vector2F aPosition, stoffe::Vector2F aSize, bool isCentered = false);
 
 	void DrawCircle(float x, float y, float aRadius, bool isCentered = false);
-	void DrawCircle(sf::Vector2f aPosition, float aRadius, bool isCentered = false);
+	void DrawCircle(stoffe::Vector2F aPosition, float aRadius, bool isCentered = false);
 
 private:
 	sf::RenderWindow* mySFMLWindow;

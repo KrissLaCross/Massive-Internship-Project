@@ -47,6 +47,37 @@ bool InputManager::WasButtonPressed(Button button)
     return myButtons[button].isDown && !myButtons[button].wasDown;
 }
 
+bool InputManager::WasMouseHit(Button button)
+{
+	if (button < eMouseLeft || button > eMouseRight)
+	{
+		return false;
+	}
+
+	return myButtons[button].isDown && !myButtons[button].wasDown;
+}
+
+bool InputManager::IsMouseDown(Button button)
+{
+	if (button < eMouseLeft || button > eMouseRight)
+	{
+		return false;
+	}
+
+	return myButtons[button].isDown;
+}
+
+bool InputManager::WasMouseReleased(Button button)
+{
+
+	if (button < eMouseLeft || button > eMouseRight)
+	{
+		return false;
+	}
+
+	return !myButtons[button].isDown && myButtons[button].wasDown;
+}
+
 void InputManager::UpdateButtonStates()
 {
 	if (!Game::GetGameWindow()->GetRenderWindow()->hasFocus())
@@ -57,17 +88,24 @@ void InputManager::UpdateButtonStates()
 	myButtons[eMoveLeft].isDown		= sf::Keyboard::isKeyPressed(sf::Keyboard::A);
 	myButtons[eMoveRight].isDown	= sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 
-	myButtons[eFire].isDown			= sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	myButtons[eMouseLeft].isDown	= sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	myButtons[eMouseRight].isDown	= sf::Mouse::isButtonPressed(sf::Mouse::Right);
+
+	myButtons[eEscape].isDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);
 }
 
 void InputManager::UpdateCursorPosition()
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(*Game::GetGameWindow()->GetRenderWindow());
-    myCursorPos.Set((float)mousePos.x, (float)mousePos.y);
+	myCursorPos = sf::Mouse::getPosition(*Game::GetGameWindow()->GetRenderWindow());
 }
 
 void InputManager::GetCursorPosition(float& X, float& Y)
 {
     X = myCursorPos.x;
     Y = myCursorPos.y;
+}
+
+stoffe::Vector2F InputManager::GetCursorPosition()
+{
+	return myCursorPos;
 }

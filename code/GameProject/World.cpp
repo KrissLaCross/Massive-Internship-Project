@@ -1,41 +1,41 @@
 #include "World.h"
-#include "Avatar.h"
-#include "Enemy.h"
-#include "Image.h"
 #include "Game.h"
 #include "Settings.h"
+#include "Timer.h"
+#include <math.h>
+
+#include <iostream>
 
 void World::Create()
 {
-    myBackGround = new Image(Settings::Background_defaultImage);
-	myBackGround->SetPosition(Vector2f(0, 0));
+	myCirclePos = { 100, 400 };
+	myLineStart = { 100, 100 };
+	myLineEnd = { 300, 200 };
+	myEdge = { &myLineStart, &myLineEnd };
 
-    myAvatar = new Avatar;
-    myEnemy = new Enemy;
 }
 
 void World::Destroy()
 {
-    delete myAvatar;
-    delete myEnemy;
-    delete myBackGround;
+
 }
 
 void World::Update()
 {
-    myAvatar->Update();
-    myEnemy->Update();
+	stoffe::Vector2F dir;
+	dir.x = (float)Game::GetInput()->IsButtonDown(InputManager::eMoveRight) - Game::GetInput()->IsButtonDown(InputManager::eMoveLeft);
+	dir.y = (float)Game::GetInput()->IsButtonDown(InputManager::eMoveDown) - Game::GetInput()->IsButtonDown(InputManager::eMoveUp);
+
 }
 
 void World::Draw()
 {
-    //Game::GetRenderer()->Draw(myBackGround);
 
-    //myAvatar->Draw();
-    //myEnemy->Draw();
-	Game::GetRenderer()->DrawLine(100, 100, 300, 200);
-	Game::GetRenderer()->DrawCircle(400, 400, 32, true);
-	Game::GetRenderer()->DrawRect(100, 300, 32, 32, false);
+
+	Game::GetRenderer()->DrawCircle(myCirclePos, 16, true);
+	myEdge.Draw();
+	//Game::GetRenderer()->DrawCircle(400, 400, 32, true);
+	//Game::GetRenderer()->DrawRect(100, 300, 32, 32, false);
 
 }
 

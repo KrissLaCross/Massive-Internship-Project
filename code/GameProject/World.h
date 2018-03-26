@@ -1,9 +1,8 @@
 #ifndef World_H
 #define World_H
 
-class Image;
-class Avatar;
-class Enemy;
+#include "Vector2.h"
+#include "Edge.h"
 
 class World
 {
@@ -14,9 +13,10 @@ public:
     void Draw();
 
 private:
-    Image* myBackGround;
-    Avatar* myAvatar;
-    Enemy* myEnemy;
+	stoffe::Vector2F myCirclePos;
+	stoffe::Vector2F myLineStart;
+	stoffe::Vector2F myLineEnd;
+	stoffe::Edge myEdge;
 };
 
 #endif

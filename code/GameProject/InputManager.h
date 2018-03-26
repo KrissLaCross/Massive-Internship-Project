@@ -1,7 +1,7 @@
 #ifndef InputManager_H
 #define InputManager_H
 
-#include "Vector2f.h"
+#include "Vector2.h"
 
 class InputManager
 {
@@ -12,13 +12,19 @@ public:
         bool wasDown;
     };
 
+
 	enum Button
     {
         eMoveUp,
         eMoveDown,
         eMoveLeft,
         eMoveRight,
-        eFire,
+        
+		eFire,
+		eMouseLeft,
+		eMouseRight,
+
+		eEscape,
 
         eTOTAL_SIZE
     };
@@ -29,7 +35,13 @@ public:
 
     bool IsButtonDown(Button button);
     bool WasButtonPressed(Button button);
-    void GetCursorPosition(float& X, float& Y);
+    
+	bool WasMouseHit(Button button);
+	bool IsMouseDown(Button button);
+	bool WasMouseReleased(Button button);
+
+	void GetCursorPosition(float& X, float& Y);
+	stoffe::Vector2F GetCursorPosition();
 
 private:
 	void UpdateButtonStates();
@@ -37,7 +49,7 @@ private:
 
     ButtonState myButtons[eTOTAL_SIZE];
 
-    Vector2f myCursorPos;
+    stoffe::Vector2F myCursorPos;
 };
 
 #endif

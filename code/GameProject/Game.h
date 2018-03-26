@@ -6,8 +6,6 @@
 #include "EventHandler.h"
 #include "InputManager.h"
 #include "World.h"
-#include "ProjectileManager.h"
-#include "CollisionManager.h"
 
 #include <iostream>
 
@@ -29,9 +27,7 @@ public:
     static GameWindow* GetGameWindow();
     static Renderer* GetRenderer();
     static InputManager* GetInput();
-    static ProjectileManager* GetProjectiles();
     static World* GetWorld();
-    static CollisionManager* GetCollision();
 
 private:
     Game();
@@ -43,8 +39,6 @@ private:
     Renderer myRenderer;
     EventHandler myEventHandler;
     InputManager myInputManager;
-    ProjectileManager myProjectileManager;
-    CollisionManager myCollisionManager;
 
     World myWorld;
 
