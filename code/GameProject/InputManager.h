@@ -15,6 +15,11 @@ public:
 
 	enum Button
     {
+		eUp,
+		eDown,
+		eRight,
+		eLeft,
+
         eMoveUp,
         eMoveDown,
         eMoveLeft,

@@ -3,6 +3,7 @@
 
 #include "Vector2.h"
 #include "Edge.h"
+#include "Rectangle.h"
 
 class World
 {
@@ -13,10 +14,10 @@ public:
     void Draw();
 
 private:
-	stoffe::Vector2F myCirclePos;
 	stoffe::Vector2F myLineStart;
 	stoffe::Vector2F myLineEnd;
 	stoffe::Edge myEdge;
+	stoffe::Rectangle myRectangle;
 };
 
 #endif

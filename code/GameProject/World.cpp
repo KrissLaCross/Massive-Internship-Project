@@ -6,13 +6,14 @@
 
 #include <iostream>
 
+#define CLAMP(x, min, max) fmin(max, fmax(min, x)) 
+
 void World::Create()
 {
-	myCirclePos = { 100, 400 };
-	myLineStart = { 100, 100 };
-	myLineEnd = { 300, 200 };
-	myEdge = { &myLineStart, &myLineEnd };
-
+	myLineStart = { 256 + 64, 256 };
+	myLineEnd = { 256 - 64, 256};
+	myEdge = { myLineStart, myLineEnd };
+	myRectangle = stoffe::Rectangle({ 256 - 32, 256 + 96}, { 64, 64 });
 }
 
 void World::Destroy()
@@ -23,19 +24,29 @@ void World::Destroy()
 void World::Update()
 {
 	stoffe::Vector2F dir;
-	dir.x = (float)Game::GetInput()->IsButtonDown(InputManager::eMoveRight) - Game::GetInput()->IsButtonDown(InputManager::eMoveLeft);
-	dir.y = (float)Game::GetInput()->IsButtonDown(InputManager::eMoveDown) - Game::GetInput()->IsButtonDown(InputManager::eMoveUp);
+	dir.x = Game::GetInput()->IsButtonDown(InputManager::eMoveRight) - Game::GetInput()->IsButtonDown(InputManager::eMoveLeft);
+	dir.y = Game::GetInput()->IsButtonDown(InputManager::eMoveDown) - Game::GetInput()->IsButtonDown(InputManager::eMoveUp);
+	myRectangle.Translate(dir * Timer::GetElapsedFrameTime() * 32.0f);
 
+	myEdge.RotateAround((Game::GetInput()->IsButtonDown(InputManager::eRight) - Game::GetInput()->IsButtonDown(InputManager::eLeft)) * Timer::GetElapsedFrameTime() , myEdge.GetMiddle());
 }
 
 void World::Draw()
 {
+	stoffe::Vector2F *corners = myRectangle.GetCorners();
+	float minProjection = INFINITY;
 
+	for (unsigned short i = 0; i < 4; i++)
+	{
+		float dot = myEdge.ProjectOnNormal(corners[i]);
+		minProjection = fmin(minProjection, dot);
+		Game::GetRenderer()->DrawLine(myEdge.GetMiddle(), myEdge.GetMiddle() + myEdge.GetNormal() * dot);
+	}
 
-	Game::GetRenderer()->DrawCircle(myCirclePos, 16, true);
+	if (minProjection < 0) myRectangle.Translate(-myEdge.GetNormal() * minProjection);
+
 	myEdge.Draw();
-	//Game::GetRenderer()->DrawCircle(400, 400, 32, true);
-	//Game::GetRenderer()->DrawRect(100, 300, 32, 32, false);
+	myRectangle.Draw();
 
 }
 

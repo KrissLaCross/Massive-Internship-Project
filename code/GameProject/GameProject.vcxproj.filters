@@ -39,6 +39,9 @@
     <ClInclude Include="Edge.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="World.cpp">
@@ -66,6 +69,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Edge.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>

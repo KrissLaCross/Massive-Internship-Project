@@ -7,43 +7,73 @@ namespace stoffe
 	{
 	}
 
-	Edge::Edge(Vector2F *aStart, Vector2F *aEnd)
-		: myStart(aStart)
-		, myEnd(aEnd)
+	Edge::Edge(Vector2F& aStart, Vector2F& aEnd)
+		: myStart(&aStart)
+		, myEnd(&aEnd)
 	{
-		Vector2F delta = *myEnd - *myStart;
-		myLength = delta.Length();
-		myNormal = delta.LeftNormal();
 	}
 
 	Edge::~Edge()
 	{
-		delete myStart;
-		delete myEnd;
 	}
 
-	inline Vector2F Edge::GetStart()
+	const Vector2F& Edge::GetStart() const
 	{
-		return myStart;
+		return *myStart;
 	}
 
-	inline Vector2F Edge::GetEnd()
+	const Vector2F& Edge::GetEnd() const
 	{
-		return myEnd;
+		return *myEnd;
 	}
 
-	inline float Edge::GetLength()
+	float Edge::GetLength() const
 	{
-		return myLength;
+		return GetDelta().Length();
 	}
 
-	inline Vector2F Edge::GetNormal()
+	const Vector2F Edge::GetNormal() const
 	{
-		return myNormal;
+		return GetDelta().LeftNormal();
+	}
+
+	const Vector2F Edge::GetDelta() const
+	{
+		return *myEnd - *myStart;
+	}
+
+	const Vector2F Edge::GetDirection() const 
+	{
+		return GetDelta().Normalized();
+	}
+
+	const Vector2F Edge::GetMiddle() const
+	{
+		return (*myStart + *myEnd) * 0.5f;
+	}
+
+	const Vector2F Edge::ClosestPointOnEdgeTo(const Vector2F &aPoint)
+	{
+		Vector2F fromStartToPoint = aPoint - *myStart;
+		float projection = fromStartToPoint.Dot(GetDirection());
+		projection = fmin(GetLength(), fmax(0.0f, projection));
+		return *myStart + GetDirection() * projection;
+	}
+
+	const float Edge::ProjectOnNormal(const Vector2F & aPoint)
+	{
+		return GetNormal().Dot(aPoint - *myStart);
+	}
+
+	void Edge::RotateAround(float aAngle, const Vector2F & aAnchor)
+	{
+		myStart->RotateAround(aAngle, aAnchor);
+		myEnd->RotateAround(aAngle, aAnchor);
 	}
 
 	void Edge::Draw()
 	{
 		Game::GetRenderer()->DrawLine(*myStart, *myEnd);
+		Game::GetRenderer()->DrawLine(GetMiddle(), GetMiddle() + GetNormal() * 10.0f);
 	}
 }
