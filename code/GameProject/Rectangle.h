@@ -23,6 +23,9 @@ namespace stoffe
 		inline const Vector2F GetBottomLeft() const { return myPosition + mySize * Vector2F::UNITY; };
 		inline const Vector2F GetBottomRight() const { return myPosition + mySize; };
 
+		inline const Vector2F Min() const { return myPosition; }
+		inline const Vector2F Max() const { return myPosition + mySize; }
+
 		inline const Vector2F GetMiddle() const { return myPosition + mySize * 0.5f; };
 		Vector2F* GetCorners() const;
 

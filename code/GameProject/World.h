@@ -18,6 +18,7 @@ private:
 	stoffe::Vector2F myLineEnd;
 	stoffe::Edge myEdge;
 	stoffe::Rectangle myRectangle;
+	bool myHit;
 };
 
 #endif

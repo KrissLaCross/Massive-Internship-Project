@@ -53,6 +53,8 @@ namespace stoffe
 
 		Vector2<T> Set(T xValue, T yValue) { x = xValue; y = yValue; return *this; }
 
+		inline T operator[](int index) const { return index == 0 ? x : y; }
+
 		inline Vector2<T> operator-() const { return Vector2<T>(-x, -y); }
 
 		inline Vector2<T> operator+(const Vector2<T> & rhs) const { return Vector2<T>(x + rhs.x, y + rhs.y); }
